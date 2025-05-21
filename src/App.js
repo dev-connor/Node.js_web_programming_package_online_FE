@@ -6,22 +6,36 @@ import { useRef, useState } from "react";
 import MainHeader from "./components/MainHeader";
 
 function App() {
-  const [name, setName] = useState({
-    first: "Connor",
-    last: "Kim"
-  })
-  const firstNameRef = useRef()
+  const [tasks, setTask] = useState([
+    {
+      id: 0,
+      text: "강의 듣기",
+    },
+  ]);
+  const inputRef = useRef();
 
   const confirm = () => {
-    console.log(firstNameRef.current.value);
-  }
-  
+    const text = inputRef.current.value;
+    setTask([
+      ...tasks,
+      {
+        id: tasks[tasks.length - 1].id + 1,
+        text,
+      },
+    ]);
+  };
+
   return (
     <div className="App">
-      <h1>{name.last} {name.first}</h1>
-      <input name="성" placeholder="성"></input>
-      <input name="이름" placeholder="이름" ref={firstNameRef}></input>
-      <button onClick={confirm}>확인</button>
+      <div>
+        <input placeholder="내 목표" ref={inputRef}></input>
+        <button onClick={confirm}>확인</button>
+      </div>
+      <ul>
+        {tasks.map((v, index) => (
+          <li key={v.id}>{v.text}</li>
+        ))}
+      </ul>
     </div>
   );
 }
