@@ -6,18 +6,17 @@ import { useState } from "react";
 import MainHeader from "./components/MainHeader";
 
 function App() {
-  const [text, setText] = useState("감추기")
+  const [text, setText] = useState("Hello");
 
-  const buttonClick = () => {
-    text === "감추기" ? setText("보이기") : setText("감추기")
-  }
-  
+  const onChange = (e) => {
+    const inputText = e.target.value;
+    setText(inputText);
+  };
+
   return (
     <div className="App">
-      <h1>적용될까?</h1>
-      {text === "보이기" && <MainHeader text="hello"></MainHeader>}
-      
-      <button onClick={() => {buttonClick()}}>{text}</button>
+      <h1>{text}</h1>
+      <input onChange={onChange}></input>
     </div>
   );
 }
