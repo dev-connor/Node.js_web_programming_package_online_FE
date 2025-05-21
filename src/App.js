@@ -2,17 +2,22 @@ import logo from "./logo.svg";
 import "./App.css";
 import CustomList from "./components/CustomList";
 import Button from "./components/Button";
+import { useState } from "react";
+import MainHeader from "./components/MainHeader";
 
 function App() {
-  const array1 = ["apple", "banana", "orange"];
+  const [text, setText] = useState("감추기")
+
+  const buttonClick = () => {
+    text === "감추기" ? setText("보이기") : setText("감추기")
+  }
+  
   return (
     <div className="App">
-      <Button></Button>
-      <ul>
-        {array1.map((value, index) => {
-          return <CustomList text={`${index} ${value}`}></CustomList>;
-        })}
-      </ul>
+      <h1>적용될까?</h1>
+      {text === "보이기" && <MainHeader text="hello"></MainHeader>}
+      
+      <button onClick={() => {buttonClick()}}>{text}</button>
     </div>
   );
 }
