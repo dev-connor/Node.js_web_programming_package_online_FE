@@ -4,26 +4,30 @@ import CustomList from "./components/CustomList";
 import Button from "./components/Button";
 import { useEffect, useRef, useState } from "react";
 import MainHeader from "./components/MainHeader";
+import Profile from "./Profile";
+import Board from "./Board";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
-  const [secound, setSecound] = useState(0);
-
-  // 마운트 이후 실행
-  useEffect(() => {
-    let interval = setInterval(() => {
-      console.log(secound);
-      setSecound(secound + 1);
-    }, 1000);
-
-    // 언마운트
-    return () => {
-      clearInterval(interval);
-    };
-  }, [secound]);
-
   return (
-    <div>
-      <p>{secound}초</p>
+    <div classNAme="App">
+      <nav>
+        <ul>
+          <li>
+            <a href="/">홈</a>
+          </li>
+          <li>
+            <a href="profile">프로필</a>
+          </li>
+          <li>
+            <a href="board">게시판</a>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="/profile" Component={Profile}></Route>
+        <Route path="/board" Component={Board}></Route>
+      </Routes>
     </div>
   );
 }
